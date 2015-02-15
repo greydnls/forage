@@ -11,12 +11,17 @@ use Illuminate\Support\Collection;
 
 class FeedItemCollection extends Collection
 {
-    public function __construct($items = array())
+    /**
+     * @param array $items
+     * @throws \Kayladnls\Forage\FeedItem\InvalidFeedItemException
+     */
+    public function __construct($items = [])
     {
         foreach ($items as $item)
         {
             if (! $item instanceof FeedItemInterface) throw new InvalidFeedItemException;
         }
-    }
 
-} 
+        parent::__construct($items);
+    }
+}
