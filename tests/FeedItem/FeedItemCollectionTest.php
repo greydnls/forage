@@ -1,4 +1,6 @@
 <?php
+use Kayladnls\Forage\FeedItem\AudioItem;
+use Kayladnls\Forage\FeedItem\BlogItem;
 use Kayladnls\Forage\FeedItem\FeedItemCollection;
 
 /**
@@ -15,7 +17,7 @@ class FeedItemCollectionTest extends PHPUnit_Framework_TestCase
      */
     public function testMustBeInstantiatedWithFeedItem()
     {
-        $collection = new FeedItemCollection(array('1'));
+        new FeedItemCollection(array('1'));
     }
 
     /**
@@ -23,7 +25,15 @@ class FeedItemCollectionTest extends PHPUnit_Framework_TestCase
      */
     public function testMustMakeWithFeedItem()
     {
-        $collection = FeedItemCollection::make(array('1'));
+        FeedItemCollection::make(array('1'));
     }
 
-} 
+    public function testItCanHoldFeedItems()
+    {
+        $items = array(new AudioItem(), new BlogItem());
+
+        $collection = FeedItemCollection::make($items);
+
+        $this->assertCount(2, $collection);
+    }
+}
